@@ -1,0 +1,174 @@
+/* Auth surface. Mobile stacks; desktop splits into a themed panel and a 480px
+   form. The Apple and Google buttons keep their brand styling by requirement —
+   only radius and press scale follow the theme. */
+
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+  .auth { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ------------------------------------------------------------ themed panel */
+
+.auth__panel {
+  position: relative;
+  border-right: var(--tp-bw) solid var(--tp-line);
+  padding: var(--gap-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+@media (max-width: 900px) {
+  .auth__panel {
+    border-right: 0;
+    border-bottom: var(--tp-bw) solid var(--tp-line);
+    min-height: 240px;
+    padding: var(--gap-lg);
+  }
+}
+
+.auth__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  font-family: var(--tp-font-display);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--tp-track-display);
+  text-transform: var(--tp-case-display);
+}
+
+.auth__pitch { max-width: 34ch; font-size: clamp(26px, 3.6vw, 40px); }
+
+.auth__panel-art { position: absolute; inset: 0; z-index: 0; opacity: 0.9; }
+.auth__panel > * { position: relative; z-index: 1; }
+
+.auth__testimonial {
+  border: var(--tp-bw) solid var(--tp-line);
+  background: var(--tp-surf);
+  padding: var(--gap-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.auth__stats { display: flex; gap: var(--gap-xl); flex-wrap: wrap; }
+
+/* ------------------------------------------------------------------- form */
+
+.auth__form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap-xl) var(--gap-lg);
+}
+
+.auth__form {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.auth__title { font-size: var(--fs-2xl); }
+.auth__sub { color: var(--ink-2); font-size: var(--fs-sm); }
+
+/* Brand buttons: exact vendor treatment, exempt from the theme's palette. */
+.oauth {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.oauth__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  min-height: 48px;
+  width: 100%;
+  padding: 0 var(--gap-lg);
+  border-radius: var(--tp-r-btn);
+  font-family: var(--tp-font-body);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform var(--tp-dur) var(--tp-ease);
+}
+
+.oauth__btn:active { transform: scale(var(--tp-press)); }
+
+.oauth__btn--apple {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+.oauth__btn--google {
+  background: #ffffff;
+  color: #1f1f1f;
+  border: 1px solid #dadce0;
+}
+
+.oauth__icon { width: 18px; height: 18px; flex: 0 0 auto; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  font-family: var(--tp-font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1 1 auto;
+  height: var(--tp-bw);
+  background: var(--tp-line);
+  opacity: 0.5;
+}
+
+.auth__switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+
+.auth__link {
+  font-family: var(--tp-font-mono);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tp-ink);
+  border-bottom: var(--tp-bw) solid var(--tp-line);
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  padding: 0 0 2px;
+  cursor: pointer;
+}
+
+.auth__link:hover { color: var(--tp-acc-2); border-bottom-color: var(--tp-acc-2); }
+
+.legal {
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+.legal a { color: var(--tp-ink); border-bottom: var(--tp-bw) dashed var(--tp-line); }
